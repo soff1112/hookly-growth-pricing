@@ -1,80 +1,24 @@
 import { motion } from "framer-motion";
-import { Check, Minus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface FeatureRow {
   feature: string;
-  free: boolean | string;
-  creator: boolean | string;
-  pro: boolean | string;
-  enterprise: boolean | string;
+  free: string;
+  pro: string;
+  agency: string;
 }
 
-interface FeatureSection {
-  category: string;
-  features: FeatureRow[];
-}
-
-const comparisonData: FeatureSection[] = [
-  {
-    category: "Analytics",
-    features: [
-      { feature: "Profile analyses", free: "5/month", creator: "Unlimited", pro: "Unlimited", enterprise: "Unlimited" },
-      { feature: "Engagement metrics", free: true, creator: true, pro: true, enterprise: true },
-      { feature: "Viral hook insights", free: true, creator: true, pro: true, enterprise: true },
-      { feature: "Real-time trend alerts", free: false, creator: true, pro: true, enterprise: true },
-      { feature: "Hook performance scoring", free: false, creator: true, pro: true, enterprise: true },
-    ],
-  },
-  {
-    category: "Competitor Intelligence",
-    features: [
-      { feature: "Competitor tracking", free: false, creator: "3 profiles", pro: "Unlimited", enterprise: "Unlimited" },
-      { feature: "Benchmark reports", free: false, creator: true, pro: true, enterprise: true },
-      { feature: "Content gap analysis", free: false, creator: false, pro: true, enterprise: true },
-    ],
-  },
-  {
-    category: "Marketing Strategy",
-    features: [
-      { feature: "Strategy workspace", free: false, creator: false, pro: true, enterprise: true },
-      { feature: "AI Strategy chat", free: false, creator: false, pro: true, enterprise: true },
-      { feature: "Content calendar", free: false, creator: false, pro: true, enterprise: true },
-    ],
-  },
-  {
-    category: "Collaboration",
-    features: [
-      { feature: "Team seats", free: "1", creator: "1", pro: "5", enterprise: "Unlimited" },
-      { feature: "Role permissions", free: false, creator: false, pro: true, enterprise: true },
-      { feature: "Shared workspaces", free: false, creator: false, pro: true, enterprise: true },
-    ],
-  },
-  {
-    category: "Exports & API",
-    features: [
-      { feature: "PDF exports", free: false, creator: true, pro: true, enterprise: true },
-      { feature: "White-label reports", free: false, creator: false, pro: true, enterprise: true },
-      { feature: "API access", free: false, creator: false, pro: true, enterprise: true },
-      { feature: "Custom integrations", free: false, creator: false, pro: false, enterprise: true },
-    ],
-  },
+const comparisonData: FeatureRow[] = [
+  { feature: "Competitors tracked", free: "3", pro: "20", agency: "100" },
+  { feature: "Own accounts", free: "1", pro: "3", agency: "10" },
+  { feature: "AI generations/month", free: "10", pro: "500", agency: "5000" },
+  { feature: "Transcriptions/month", free: "5", pro: "200", agency: "2000" },
 ];
 
-const plans = ["Free", "Creator", "Pro", "Enterprise"];
+const plans = ["Free", "Pro", "Agency"];
 
-const renderValue = (value: boolean | string) => {
-  if (typeof value === "string") {
-    return <span className="text-sm text-foreground font-medium">{value}</span>;
-  }
-  if (value) {
-    return (
-      <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
-        <Check className="w-3 h-3 text-primary" />
-      </div>
-    );
-  }
-  return <Minus className="w-4 h-4 text-muted-foreground/40 mx-auto" />;
+const renderValue = (value: string) => {
+  return <span className="text-sm text-foreground font-medium">{value}</span>;
 };
 
 export const ComparisonTable = () => {
@@ -104,7 +48,7 @@ export const ComparisonTable = () => {
         >
           <div className="min-w-[640px]">
             {/* Header */}
-            <div className="grid grid-cols-5 gap-4 mb-2 sticky top-0 bg-hookly-light py-4 border-b border-border">
+            <div className="grid grid-cols-4 gap-4 mb-2 sticky top-0 bg-hookly-light py-4 border-b border-border">
               <div className="col-span-1" />
               {plans.map((plan, index) => (
                 <div
@@ -124,31 +68,21 @@ export const ComparisonTable = () => {
               ))}
             </div>
 
-            {/* Sections */}
-            {comparisonData.map((section, sectionIndex) => (
-              <div key={section.category} className="mb-6">
-                <div className="py-3 px-4 bg-secondary/50 rounded-lg mb-2">
-                  <span className="text-sm font-semibold text-foreground">
-                    {section.category}
-                  </span>
+            {/* Rows */}
+            {comparisonData.map((row, rowIndex) => (
+              <div
+                key={row.feature}
+                className={cn(
+                  "grid grid-cols-4 gap-4 py-3 px-4",
+                  rowIndex !== comparisonData.length - 1 && "border-b border-border/50"
+                )}
+              >
+                <div className="col-span-1 text-sm text-muted-foreground">
+                  {row.feature}
                 </div>
-                {section.features.map((row, rowIndex) => (
-                  <div
-                    key={row.feature}
-                    className={cn(
-                      "grid grid-cols-5 gap-4 py-3 px-4",
-                      rowIndex !== section.features.length - 1 && "border-b border-border/50"
-                    )}
-                  >
-                    <div className="col-span-1 text-sm text-muted-foreground">
-                      {row.feature}
-                    </div>
-                    <div className="text-center">{renderValue(row.free)}</div>
-                    <div className="text-center">{renderValue(row.creator)}</div>
-                    <div className="text-center">{renderValue(row.pro)}</div>
-                    <div className="text-center">{renderValue(row.enterprise)}</div>
-                  </div>
-                ))}
+                <div className="text-center">{renderValue(row.free)}</div>
+                <div className="text-center">{renderValue(row.pro)}</div>
+                <div className="text-center">{renderValue(row.agency)}</div>
               </div>
             ))}
           </div>
