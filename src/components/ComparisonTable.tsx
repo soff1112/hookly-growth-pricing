@@ -4,18 +4,17 @@ import { cn } from "@/lib/utils";
 interface FeatureRow {
   feature: string;
   free: string;
-  pro: string;
   agency: string;
 }
 
 const comparisonData: FeatureRow[] = [
-  { feature: "Competitors tracked", free: "3", pro: "20", agency: "100" },
-  { feature: "Own accounts", free: "1", pro: "3", agency: "10" },
-  { feature: "AI generations/month", free: "10", pro: "500", agency: "5000" },
-  { feature: "Transcriptions/month", free: "5", pro: "200", agency: "2000" },
+  { feature: "Competitors tracked", free: "3", agency: "100" },
+  { feature: "Own accounts", free: "1", agency: "10" },
+  { feature: "AI generations/month", free: "10", agency: "5000" },
+  { feature: "Transcriptions/month", free: "5", agency: "2000" },
 ];
 
-const plans = ["Free", "Pro", "Agency"];
+const plans = ["Free", "Agency"];
 
 const renderValue = (value: string) => {
   return <span className="text-sm text-foreground font-medium">{value}</span>;
@@ -48,18 +47,18 @@ export const ComparisonTable = () => {
         >
           <div className="min-w-[640px]">
             {/* Header */}
-            <div className="grid grid-cols-4 gap-4 mb-2 sticky top-0 bg-hookly-light py-4 border-b border-border">
+            <div className="grid grid-cols-3 gap-4 mb-2 sticky top-0 bg-hookly-light py-4 border-b border-border">
               <div className="col-span-1" />
               {plans.map((plan, index) => (
                 <div
                   key={plan}
                   className={cn(
                     "text-center font-semibold text-sm",
-                    index === 2 ? "text-primary" : "text-foreground"
+                    index === 1 ? "text-primary" : "text-foreground"
                   )}
                 >
                   {plan}
-                  {index === 2 && (
+                  {index === 1 && (
                     <div className="text-[10px] font-normal text-primary mt-0.5">
                       Most Popular
                     </div>
@@ -73,7 +72,7 @@ export const ComparisonTable = () => {
               <div
                 key={row.feature}
                 className={cn(
-                  "grid grid-cols-4 gap-4 py-3 px-4",
+                  "grid grid-cols-3 gap-4 py-3 px-4",
                   rowIndex !== comparisonData.length - 1 && "border-b border-border/50"
                 )}
               >
@@ -81,7 +80,6 @@ export const ComparisonTable = () => {
                   {row.feature}
                 </div>
                 <div className="text-center">{renderValue(row.free)}</div>
-                <div className="text-center">{renderValue(row.pro)}</div>
                 <div className="text-center">{renderValue(row.agency)}</div>
               </div>
             ))}

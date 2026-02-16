@@ -18,20 +18,6 @@ const pricingPlans = [
     variant: "default" as const,
   },
   {
-    name: "Pro",
-    monthlyPrice: "$49",
-    yearlyPrice: "$37",
-    description: "For serious content creators",
-    features: [
-      "20 competitors",
-      "3 own accounts",
-      "500 AI generations/month",
-      "200 transcriptions/month",
-    ],
-    cta: "Start Free Trial",
-    variant: "secondary" as const,
-  },
-  {
     name: "Agency",
     monthlyPrice: "$199",
     yearlyPrice: "$149",
@@ -62,7 +48,7 @@ export const PricingCards = () => {
           onCurrencyChange={setCurrency}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-3xl mx-auto">
           {pricingPlans.map((plan, index) => (
             <PricingCard
               key={plan.name}
