@@ -38,7 +38,11 @@ export const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map(link => {})}
+            {navLinks.map(link => (
+              <a key={link.label} href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                {link.label}
+              </a>
+            ))}
           </div>
 
           {/* Desktop CTA */}
