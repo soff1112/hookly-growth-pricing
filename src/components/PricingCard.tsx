@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 interface PricingCardProps {
@@ -10,6 +12,7 @@ interface PricingCardProps {
   features: string[];
   cta: string;
   isPopular?: boolean;
+  showPromoCode?: boolean;
   variant?: "default" | "primary" | "secondary";
   index: number;
 }
@@ -21,9 +24,11 @@ export const PricingCard = ({
   features,
   cta,
   isPopular = false,
+  showPromoCode = false,
   variant = "default",
   index,
 }: PricingCardProps) => {
+  const [promoCode, setPromoCode] = useState("");
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -75,6 +80,21 @@ export const PricingCard = ({
           </li>
         ))}
       </ul>
+
+      {/* Promo Code */}
+      {showPromoCode && (
+        <div className="mb-4">
+          <Input
+            type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            placeholder="Enter promo code"
+            value={promoCode}
+            onChange={(e) => setPromoCode(e.target.value)}
+            className="text-center text-sm h-9 rounded-lg border-border/60 focus:border-primary"
+          />
+        </div>
+      )}
 
       {/* CTA Button */}
       <Button
