@@ -38,11 +38,11 @@ export const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map(link => (
-              <a key={link.label} href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) => {}
+
+
+
+          )}
           </div>
 
           {/* Desktop CTA */}
@@ -73,7 +73,7 @@ export const Navbar = () => {
         height: 0
       }} className="lg:hidden pb-6">
             <div className="flex flex-col gap-4">
-              {navLinks.map(link => <a key={link.label} href={link.href} className="text-muted-foreground hover:text-foreground transition-colors py-2" onClick={() => setIsOpen(false)}>
+              {navLinks.map((link) => <a key={link.label} href={link.href} className="text-muted-foreground hover:text-foreground transition-colors py-2" onClick={() => setIsOpen(false)}>
                   {link.label}
                 </a>)}
               <div className="flex flex-col gap-3 pt-4 border-t border-border">
