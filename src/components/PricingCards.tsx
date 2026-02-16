@@ -31,6 +31,7 @@ const pricingPlans = [
     cta: "Start Free Trial",
     variant: "primary" as const,
     isPopular: true,
+    showPromoCode: true,
   },
 ];
 
@@ -58,6 +59,7 @@ export const PricingCards = () => {
               features={plan.features}
               cta={plan.cta}
               isPopular={plan.isPopular}
+              showPromoCode={(plan as any).showPromoCode}
               variant={plan.variant}
               index={index}
             />
